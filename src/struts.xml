@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts  
+Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">  
+
+
+<struts>
+	<package name="default"  extends="struts-default" namespace="/">
+	
+		 <action name="">
+		 	<result>/WEB-INF/views/index.jsp</result>
+		 </action> 
+	
+		<action name="getTodos" class="com.paxcel.crud.actions.GetTodos">
+			<result name="re_login" type="redirectAction">login</result>
+			<result name="success" type="freemarker">/WEB-INF/views/getTodos.ftl</result>
+		</action>
+		
+		<action name = "login" class="com.paxcel.crud.actions.Login">
+			<result name="login" type="freemarker">/WEB-INF/views/login.ftl</result>
+			<result name = "login_failed" type="freemarker">/WEB-INF/views/login.ftl</result>
+			<result name = "success" type="redirectAction">getTodos</result>
+		</action>
+		
+		<action name = 'signup' class = "com.paxcel.crud.actions.SignUp">
+			<result type="freemarker" name="failure">/WEB-INF/views/signup.ftl</result>
+			<result type="freemarker" name="success">/WEB-INF/views/signup.ftl</result>
+		</action>
+		
+	</package>
+	
+	<package name="operations" extends="json-default" namespace="/">
+		<action name="insertTodo" class="com.paxcel.crud.actions.TodosOperations" method="insert">
+			<result name="success" type="json"/>
+		</action>
+		
+		<action name="deleteTodo" class="com.paxcel.crud.actions.TodosOperations" method="delete">
+			<result name="success" type="json"/>
+		</action>
+		
+		<action name="updateTodo" class="com.paxcel.crud.actions.TodosOperations" method="update">
+			<result name="success" type="json"/>
+		</action>
+	</package>
+	
+</struts>
